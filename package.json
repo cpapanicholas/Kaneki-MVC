@@ -1,18 +1,19 @@
 {
   "name": "kaneki-mvc",
+  "author": "CAP",
+  "license": "MIT",
   "version": "1.0.0",
-  "description": "",
+  "description": "CMS-style blog site for tech developers",
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seeds/seedDB.js"
   },
   "repository": {
     "type": "git",
     "url": "Kaneki-MVC"
   },
-  "author": "CAP",
-  "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
@@ -26,5 +27,4 @@
     "connect-session-sequelize": "7.1.7",
     "express-handlebars": "7.1.2"
   }
-
 }
