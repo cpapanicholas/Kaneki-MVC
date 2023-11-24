@@ -1,28 +1,35 @@
-//add consts for seeds here then require connection js.  After that make another const that includes all seeds, make it async and sequilize the seeds like so :
+const { User, Post, Comment } = require('../models');
+const sequelize = require('../config/connections');
+const bcrypt = require('bcrypt');
 
-const seedCategories = require('./category-seeds');
-const seedProducts = require('./product-seeds');
-const seedTags = require('./tag-seeds');
-const seedProductTags = require('./product-tag-seeds');
-
-const sequelize = require('../config/connection');
-
-const seedAll = async () => {
+const seedDatabase = async () => {
+  // Sync the models with the database
   await sequelize.sync({ force: true });
-  console.log('\n----- DATABASE SYNCED -----\n');
-  await seedCategories();
-  console.log('\n----- CATEGORIES SEEDED -----\n');
 
-  await seedProducts();
-  console.log('\n----- PRODUCTS SEEDED -----\n');
+  // Seed users
+  const hashedPassword = await bcrypt.hash('password123', 10); // Change this to your desired default password
+  const users = await User.bulkCreate([
+    { username: 'user1', password: hashedPassword },
+    { username: 'user2', password: hashedPassword },
+  ]);
 
-  await seedTags();
-  console.log('\n----- TAGS SEEDED -----\n');
+  // Seed posts
+  const posts = await Post.bulkCreate([
+    { title: 'First Post', content: 'This is the content of the first post.', userId: users[0].id },
+    { title: 'Second Post', content: 'This is the content of the second post.', userId: users[1].id },
+  ]);
 
-  await seedProductTags();
-  console.log('\n----- PRODUCT TAGS SEEDED -----\n');
+  // Seed comments
+  await Comment.bulkCreate([
+    { text: 'Great post!', userId: users[1].id, postId: posts[0].id },
+    { text: 'Nice content!', userId: users[0].id, postId: posts[1].id },
+  ]);
 
-  process.exit(0);
+  console.log('Database seeded successfully.');
+
+  // Close the Sequelize connection
+  sequelize.close();
 };
 
-seedAll();
+// Run the seed function
+seedDatabase();

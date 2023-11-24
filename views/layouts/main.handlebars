@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MVC</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog</title>
+  <!-- Add your CSS links or stylesheets here -->
+  <link rel="stylesheet" href="/styles/main.css">
 </head>
+
 <body>
-    
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      {{#if user}}
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      {{else}}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Signup</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="content">
+    {{{body}}}
+  </div>
+
+  <!-- Footer (if needed) -->
+  <footer>
+    <p>&copy; 2023 Tech Blog</p>
+  </footer>
+
+  <!-- Add your script tags or external scripts here -->
+  <script src="/scripts/main.js"></script>
+
 </body>
+
 </html>
