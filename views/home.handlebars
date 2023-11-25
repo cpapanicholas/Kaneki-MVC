@@ -1,0 +1,21 @@
+<!-- views/home.handlebars -->
+
+{{> navbar}}
+
+<div class="container mt-4">
+  <h2>Welcome to the Tech Blog!</h2>
+
+  {{#if posts.length}}
+    <h3>Latest Blog Posts:</h3>
+    <ul class="list-group">
+      {{#each posts}}
+        <li class="list-group-item">
+          <a href="/post/{{id}}">{{title}}</a>
+          <p class="text-muted">{{createdAt}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No blog posts available. Be the first to create one!</p>
+  {{/if}}
+</div>

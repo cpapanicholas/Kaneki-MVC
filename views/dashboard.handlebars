@@ -1,0 +1,41 @@
+<!-- views/dashboard.handlebars -->
+
+{{> navbar}}
+
+<div class="container mt-4">
+  <h2>Welcome to Your Dashboard, {{user.username}}!</h2>
+
+  {{#if posts.length}}
+    <h3>Your Blog Posts:</h3>
+    <ul class="list-group">
+      {{#each posts}}
+        <li class="list-group-item">
+          <a href="/post/{{id}}">{{title}}</a>
+          <span class="float-right">
+            <a href="/post/{{id}}/edit" class="btn btn-sm btn-warning">Edit</a>
+            <form action="/api/posts/{{id}}" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </span>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>You haven't created any blog posts yet. Get started by adding a new post!</p>
+  {{/if}}
+
+  <hr>
+
+  <h3>Add a New Blog Post:</h3>
+  <form action="/api/posts" method="POST">
+    <div class="form-group">
+      <label for="post-title">Title:</label>
+      <input type="text" class="form-control" id="post-title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="post-content">Content:</label>
+      <textarea class="form-control" id="post-content" name="content" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Post</button>
+  </form>
+</div>
