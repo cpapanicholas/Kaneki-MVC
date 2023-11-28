@@ -9,8 +9,8 @@ const seedDatabase = async () => {
   // Seed users
   const hashedPassword = await bcrypt.hash('password123', 10); // Change this to your desired default password
   const users = await User.bulkCreate([
-    { username: 'user1', password: hashedPassword },
-    { username: 'user2', password: hashedPassword },
+    { name: 'jon', email: 'alias@mail.co', username: 'user1', password: hashedPassword },
+    { name: 'gary', email: 'aliaz@mailz.com', username: 'user2', password: hashedPassword },
   ]);
 
   // Seed posts
