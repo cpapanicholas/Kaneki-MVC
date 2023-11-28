@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import your models as needed
-const { Post, User, Comment } = require('../models');
+const { Post, User, Comment } = require('../../models');
 
 // Home route
 router.get('/', async (req, res) => {

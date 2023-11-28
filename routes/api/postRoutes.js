@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const isAuthenticated = require('../middleware/isAuthenticated');
+const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
 // Import your models as needed
-const { Post, User, Comment } = require('../models');
+const { Post, User, Comment } = require('../../models');
 
 // View a specific blog post
 router.get('/post/:id', async (req, res) => {

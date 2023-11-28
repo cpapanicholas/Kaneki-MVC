@@ -3,7 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 // Import your models as needed
-const { User } = require('../models');
+const { Post, User, Comment } = require('../../models');
+const isAuthenticated = require('../../config/middleware/isAuthenticated');
 
 // User signup
 router.post('/signup', async (req, res) => {
@@ -41,3 +42,4 @@ router.post('/signup', async (req, res) => {
 
 //     // Check if the user exists and the password is correct
 // // } });
+module.exports = router;

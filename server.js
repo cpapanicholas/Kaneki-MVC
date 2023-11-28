@@ -2,15 +2,17 @@
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const sequelize = require('./models'); // Adjust the path based on your project structure
+const sequelize = require('./config/connections'); // Adjust the path based on your project structure
 const routes = require('./routes');
 
 // Create an Express application
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const hbs = exphbs.create();
+
 // Set up Handlebars as the view engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Middleware for handling POST data
@@ -28,7 +30,8 @@ const sessionOptions = {
 };
 
 app.use(session(sessionOptions));
-
+// Routes
+app.use(routes);
 // Set up Sequelize to sync with the database and start the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
@@ -36,5 +39,3 @@ sequelize.sync({ force: false }).then(() => {
   });
 });
 
-// Routes
-app.use(routes);
